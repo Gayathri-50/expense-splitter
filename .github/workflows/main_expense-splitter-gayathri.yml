@@ -47,19 +47,13 @@ jobs:
         uses: actions/download-artifact@v4
         with:
           name: node-app
-      
-      - name: Login to Azure
-        uses: azure/login@v2
-        with:
-          client-id: ${{ secrets.AZUREAPPSERVICE_CLIENTID_B8EE484534E94B7B85771168B012E3C5 }}
-          tenant-id: ${{ secrets.AZUREAPPSERVICE_TENANTID_536ED5F5477546DBAC77A275CEB700C7 }}
-          subscription-id: ${{ secrets.AZUREAPPSERVICE_SUBSCRIPTIONID_1E4BD5BB57E748CC9770BA5AA6788369 }}
-
+     
       - name: 'Deploy to Azure Web App'
         id: deploy-to-webapp
         uses: azure/webapps-deploy@v3
         with:
           app-name: 'expense-splitter-gayathri'
-          slot-name: 'Production'
+          publish-profile: ${{ secrets.AZURE_WEBAPP_PUBLISH_PROFILE }}
           package: .
+
           
