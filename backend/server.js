@@ -26,7 +26,6 @@ app.get("/", (req, res) => {
 });
 
 /* ---------------- USERS ---------------- */
-
 app.get("/api/users", (req, res) => {
   const db = readData();
   res.json(db.users);
@@ -54,7 +53,6 @@ app.post("/api/users", (req, res) => {
 });
 
 /* ---------------- EXPENSES ---------------- */
-
 app.get("/api/expenses", (req, res) => {
   const db = readData();
   res.json(db.expenses);
@@ -86,7 +84,6 @@ app.post("/api/expenses", (req, res) => {
 });
 
 /* ---------------- SUMMARY ---------------- */
-
 app.get("/api/summary", (req, res) => {
   const db = readData();
   const users = db.users;
@@ -121,18 +118,17 @@ app.get("/api/summary", (req, res) => {
   });
 });
 
-/* ---------------- START SERVER ---------------- */
-
-const PORT = process.env.PORT || 5000;
-app.listen(PORT, () => {
-  console.log("Server running on port", PORT);
-});
-const path = require("path");
-
+/* ---------------- PRODUCTION BUILD ---------------- */
 if (process.env.NODE_ENV === "production") {
-  app.use(require("express").static(path.join(__dirname, "../frontend/build")));
+  app.use(express.static(path.join(__dirname, "../frontend/build")));
 
   app.get("*", (req, res) => {
     res.sendFile(path.join(__dirname, "../frontend/build/index.html"));
   });
 }
+
+/* ---------------- START SERVER ---------------- */
+const PORT = process.env.PORT || 5000;
+app.listen(PORT, () => {
+  console.log("Server running on port", PORT);
+});
