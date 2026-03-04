@@ -1,4 +1,35 @@
 {
-  "users": [],
-  "expenses": []
+  "users": [
+    {
+      "id": "ca8k3sy3li5mmbl5m3q",
+      "name": "gayathri",
+      "email": "gayathrireddy5050@gmailcom"
+    },
+    {
+      "id": "r0z42a81ekmmbl5yll",
+      "name": "chethana",
+      "email": "chethana@gmail.com"
+    },
+    {
+      "id": "mddmng6vhdammbl6itm",
+      "name": "navya",
+      "email": "navyasrichamarthi@gmail.com"
+    }
+  ],
+  "expenses": [
+    {
+      "id": "9pbm19jafgbmmbl6wmw",
+      "title": "lunch",
+      "amount": 15600,
+      "paidBy": "mddmng6vhdammbl6itm",
+      "createdAt": "2026-03-04T05:19:03.608Z"
+    },
+    {
+      "id": "xjvxn6hda2lmmbl7882",
+      "title": "shopping",
+      "amount": 100000,
+      "paidBy": "r0z42a81ekmmbl5yll",
+      "createdAt": "2026-03-04T05:19:18.626Z"
+    }
+  ]
 }

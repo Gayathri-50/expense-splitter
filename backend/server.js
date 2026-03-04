@@ -26,7 +26,6 @@ app.get("/", (req, res) => {
 });
 
 /* ---------------- USERS ---------------- */
-
 app.get("/api/users", (req, res) => {
   const db = readData();
   res.json(db.users);
@@ -40,13 +39,7 @@ app.post("/api/users", (req, res) => {
   }
 
   const db = readData();
-
-  const user = {
-    id: uid(),
-    name,
-    email,
-  };
-
+  const user = { id: uid(), name, email };
   db.users.push(user);
   writeData(db);
 
@@ -54,7 +47,6 @@ app.post("/api/users", (req, res) => {
 });
 
 /* ---------------- EXPENSES ---------------- */
-
 app.get("/api/expenses", (req, res) => {
   const db = readData();
   res.json(db.expenses);
@@ -64,9 +56,7 @@ app.post("/api/expenses", (req, res) => {
   const { title, amount, paidBy } = req.body;
 
   if (!title || amount == null || !paidBy) {
-    return res.status(400).json({
-      message: "title, amount and paidBy required",
-    });
+    return res.status(400).json({ message: "title, amount and paidBy required" });
   }
 
   const db = readData();
@@ -86,7 +76,6 @@ app.post("/api/expenses", (req, res) => {
 });
 
 /* ---------------- SUMMARY ---------------- */
-
 app.get("/api/summary", (req, res) => {
   const db = readData();
   const users = db.users;
@@ -121,18 +110,15 @@ app.get("/api/summary", (req, res) => {
   });
 });
 
-/* ---------------- START SERVER ---------------- */
-
-const PORT = process.env.PORT || 5000;
-app.listen(PORT, () => {
-  console.log("Server running on port", PORT);
-});
-const path = require("path");
-
+/* ---------- serve frontend in production (optional) ---------- */
 if (process.env.NODE_ENV === "production") {
-  app.use(require("express").static(path.join(__dirname, "../frontend/build")));
+  app.use(express.static(path.join(__dirname, "../frontend/build")));
 
   app.get("*", (req, res) => {
     res.sendFile(path.join(__dirname, "../frontend/build/index.html"));
   });
 }
+
+/* ---------------- START SERVER ---------------- */
+const PORT = process.env.PORT || 5000;
+app.listen(PORT, () => console.log("Server running on port", PORT));
