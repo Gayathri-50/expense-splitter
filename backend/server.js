@@ -25,7 +25,7 @@ app.get("/", (req, res) => {
   res.send("Backend running ✅");
 });
 
-/* ---------------- USERS ---------------- */
+
 app.get("/api/users", (req, res) => {
   const db = readData();
   res.json(db.users);
@@ -46,7 +46,7 @@ app.post("/api/users", (req, res) => {
   res.status(201).json(user);
 });
 
-/* ---------------- EXPENSES ---------------- */
+
 app.get("/api/expenses", (req, res) => {
   const db = readData();
   res.json(db.expenses);
@@ -75,7 +75,7 @@ app.post("/api/expenses", (req, res) => {
   res.status(201).json(expense);
 });
 
-/* ---------------- SUMMARY ---------------- */
+
 app.get("/api/summary", (req, res) => {
   const db = readData();
   const users = db.users;
@@ -110,8 +110,9 @@ app.get("/api/summary", (req, res) => {
   });
 });
 
-/* ---------- serve frontend in production (optional) ---------- */
+
 if (process.env.NODE_ENV === "production") {
+  // If your frontend build is in: frontend/build
   app.use(express.static(path.join(__dirname, "../frontend/build")));
 
   app.get("*", (req, res) => {
@@ -119,6 +120,8 @@ if (process.env.NODE_ENV === "production") {
   });
 }
 
-/* ---------------- START SERVER ---------------- */
+
 const PORT = process.env.PORT || 5000;
-app.listen(PORT, () => console.log("Server running on port", PORT));
+app.listen(PORT, () => {
+  console.log("Server running on port", PORT);
+});
